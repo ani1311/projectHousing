@@ -1,16 +1,20 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  let navigate = useNavigate();
+
   const onSubmit = (e) => {
-      let successful = false;
+      let successful = true;
       
       // Some Login check
       
       if(successful) {
           onLoginSuccess()
+          navigate("/",{replace:true})
       } else {
           alert("Login Failed")
       }
