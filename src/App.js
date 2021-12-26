@@ -10,7 +10,7 @@ import CreatePost from "./components/createPost/CreatePost";
 
 function App() {
 
-  const [loggedIn,updateLogin] = useState(true)
+  const [loggedIn,updateLogin] = useState(false)
   const [userProp,updateUser] = useState({})
 
   const  updateToLogedIn = () => {
@@ -26,7 +26,7 @@ function App() {
           <Route path="/" element={loggedIn?<UserHome userProp/>:<Home />} />
           <Route path="/login" element={<Login onLoginSuccess={updateToLogedIn}/>} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/createPost" element={<CreatePost userProp />} />
+          <Route path="/createPost" element={<CreatePost />} />
         </Routes>
 
         <Footer />

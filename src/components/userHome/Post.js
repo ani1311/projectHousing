@@ -2,7 +2,7 @@ const Post = ({post}) => {
   return (
     <div>
       <h3>
-        {post.name}
+        {post.text}
       </h3>
       {/* <p>{task.day}</p> */}
     </div>

@@ -1,22 +1,39 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import firebaseConfig from "../../firebaseConfig.json";
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set, push } from "firebase/database";
+
+function createPost(db, post, successful) {
+  const postListRef = ref(db, "posts");
+  const newPostRef = push(postListRef);
+  set(newPostRef, post);
+}
 
 const CreatePost = () => {
   const [text, setText] = useState("");
-  
+
+  const firebaseApp = initializeApp(firebaseConfig);
+  const firebaseDatabase = getDatabase(firebaseApp);
+
   let navigate = useNavigate();
 
   const onSubmit = (e) => {
     let successful = true;
 
-    // Some Signup check
+    createPost(
+      firebaseDatabase,
+      {
+        text: text,
+      },
+      successful
+    );
 
     if (successful) {
-        alert("Post created")
-        navigate("/",{replace:true})
-
+      alert("Post created");
+      navigate("/", { replace: true });
     } else {
-        alert("Post creation failed")
+      alert("Post creation failed");
     }
   };
 
@@ -32,9 +49,9 @@ const CreatePost = () => {
         />
       </div>
 
-      <input type="submit" value="Signup" className="btn btn-block" />
+      <input type="submit" value="Submit" className="btn btn-block" />
     </form>
   );
-}
+};
 
-export default CreatePost
+export default CreatePost;
